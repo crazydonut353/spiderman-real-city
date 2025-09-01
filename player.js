@@ -128,6 +128,7 @@ AFRAME.registerComponent("player", {
     this.rightWeb = document.getElementById("web-right");
     this.leftWeb = document.getElementById("web-left");
     this.map = document.getElementById("map");
+    this.world = document.getElementById("world");
     
     if (!this.camera.getAttribute("camera").active) {
       this.camera.setAttribute("camera", { active: true });
@@ -167,7 +168,7 @@ AFRAME.registerComponent("player", {
     velocityRaycaster.raycaster.far = Math.max(this.velocity.length() * timeDeltaSec, this.data.padding);
     velocityRaycaster.checkIntersections();
     if (!velocityRaycaster.intersections.length) {
-      rigLocalPosition.addScaledVector(this.velocity, timeDeltaSec);
+      // rigLocalPosition.addScaledVector(this.velocity, timeDeltaSec);
     } else {
       // collision with environment
       this.velocity.reflect(velocityRaycaster.intersections[0].face.normal);
@@ -234,7 +235,7 @@ AFRAME.registerComponent("player", {
     if (this.cameraWorldPosition.distanceTo(this.lastCollisionWorldPosition) < this.data.keepAwayWallsDistance) {
       let lastWallDistance = this.lastCollisionPlane.distanceToPoint(this.cameraWorldPosition);
       if (lastWallDistance < this.data.padding) {
-        rigLocalPosition.addScaledVector(this.lastCollisionPlane.normal, this.data.padding - lastWallDistance);
+        // rigLocalPosition.addScaledVector(this.lastCollisionPlane.normal, this.data.padding - lastWallDistance);
       }
 
       // keep hands away from walls
@@ -244,7 +245,7 @@ AFRAME.registerComponent("player", {
         this.rightHandWorldPosition.add(rigLocalPosition);
         lastWallDistance = this.lastCollisionPlane.distanceToPoint(this.rightHandWorldPosition);
         if (lastWallDistance < this.data.paddingHand) {
-          rigLocalPosition.addScaledVector(this.lastCollisionPlane.normal, this.data.paddingHand - lastWallDistance);
+          // rigLocalPosition.addScaledVector(this.lastCollisionPlane.normal, this.data.paddingHand - lastWallDistance);
           this.velocity.addScaledVector(
             this.lastCollisionPlane.normal,
             (this.data.paddingHand - lastWallDistance) * this.data.handStrength
@@ -256,7 +257,7 @@ AFRAME.registerComponent("player", {
         this.leftHandWorldPosition.add(rigLocalPosition);
         lastWallDistance = this.lastCollisionPlane.distanceToPoint(this.leftHandWorldPosition);
         if (lastWallDistance < this.data.paddingHand) {
-          rigLocalPosition.addScaledVector(this.lastCollisionPlane.normal, this.data.paddingHand - lastWallDistance);
+          // rigLocalPosition.addScaledVector(this.lastCollisionPlane.normal, this.data.paddingHand - lastWallDistance);
           this.velocity.addScaledVector(
             this.lastCollisionPlane.normal,
             (this.data.paddingHand - lastWallDistance) * this.data.handStrength
@@ -285,5 +286,8 @@ AFRAME.registerComponent("player", {
         this.updateScore();
       }
     }
+
+    // move world instead of player
+    this.world.object3D.position.addScaledVector(this.velocity, -timeDeltaSec);
   }
 });
