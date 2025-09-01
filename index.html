@@ -26,17 +26,17 @@
   <body style="position: relative;">
     <a-scene
       renderer="highRefreshRate: false; colorManagement: true;"
-      fog="type: linear; color: #eafaff; far: 500;"
-      background="color: #eafaff;"
+      fog="type: linear; color: #111; far: 500;"
+      background="color: #111;"
     >
       <a-sky
         id="sky"
-        theta-length="110"
-        radius="900"
-        material="topColor: #87ceeb; bottomColor: #eafaff; shader: gradientshader; fog: false;"
+        src="#night-hdri"
+        rotation="0 -90 0"
       ></a-sky>
 
       <a-assets>
+        <img id="night-hdri" src="assets/night-hdri.png" preload="auto" />
         <img
           id="style1-building1-texture"
           src="assets/s1b1.jpg"

@@ -80,14 +80,27 @@ AFRAME.registerComponent("tile", {
   },
 
   addBuildings1: function() {
-    this.addBuilding(90, 90, 50 + 150 * this.nextRand(), 20 * this.nextRand() - 10, 20 * this.nextRand() - 10);
+    // Add 4 buildings with random positions and sizes
+    for (let i = 0; i < 4; i++) {
+      let width = 40 + 60 * this.nextRand();
+      let depth = 40 + 60 * this.nextRand();
+      let height = 50 + 150 * this.nextRand();
+      let x = 60 * (this.nextRand() - 0.5);
+      let z = 60 * (this.nextRand() - 0.5);
+      this.addBuilding(width, depth, height, x, z);
+    }
   },
 
   addBuildings2: function() {
-    this.addBuilding(50, 50, 40 + 100 * this.nextRand(), -35 - this.nextRand() * 8, -35 - this.nextRand() * 8);
-    this.addBuilding(50, 50, 60 + 90 * this.nextRand(), 35 + this.nextRand() * 8, -35 - this.nextRand() * 8);
-    this.addBuilding(50, 50, 40 + 180 * this.nextRand(), -35 - this.nextRand() * 8, 35 + this.nextRand() * 8);
-    this.addBuilding(50, 50, 50 + 70 * this.nextRand(), 35 + this.nextRand() * 8, 35 + this.nextRand() * 8);
+    // Add 6 buildings with random positions and sizes
+    for (let i = 0; i < 6; i++) {
+      let width = 30 + 70 * this.nextRand();
+      let depth = 30 + 70 * this.nextRand();
+      let height = 40 + 180 * this.nextRand();
+      let x = 70 * (this.nextRand() - 0.5);
+      let z = 70 * (this.nextRand() - 0.5);
+      this.addBuilding(width, depth, height, x, z);
+    }
   }
 
   /*
